@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
-//testing branches 2
+
+//what about now
 public class SnakeActivity extends Activity {
 
     // Declare an instance of SnakeGame
