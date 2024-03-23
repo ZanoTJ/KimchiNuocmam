@@ -146,7 +146,7 @@ class SnakeGame extends SurfaceView implements Runnable{
     public boolean updateRequired() {
 
         // Run at 10 frames per second
-        final long TARGET_FPS = 10;
+        final long TARGET_FPS = 25;
         // There are 1000 milliseconds in a second
         final long MILLIS_PER_SECOND = 1000;
 
@@ -211,10 +211,21 @@ class SnakeGame extends SurfaceView implements Runnable{
             mPaint.setColor(Color.argb(255, 255, 255, 255));
             mPaint.setTextSize(120);
 
+            // Draw the score
+            mCanvas.drawText("" + mScore, 20, 120, mPaint);
+
+            // Draw the apple and the snake
+            mApple.draw(mCanvas, mPaint);
+            mSnake.draw(mCanvas, mPaint);
+
+            //Draw our names
+            mPaint.setColor(Color.argb(255, 64, 224, 208));
+            mCanvas.drawText("David, Jin", + 1700, 120, mPaint);
+
             // Draw some text while paused
             if(mPaused && gotReset){
                 // Set the size and color of the mPaint for the text
-                mPaint.setColor(Color.argb(255, 255, 255, 255));
+                mPaint.setColor(Color.argb(255, 64, 224, 208));
                 mPaint.setTextSize(250);
 
                 // Draw the message
