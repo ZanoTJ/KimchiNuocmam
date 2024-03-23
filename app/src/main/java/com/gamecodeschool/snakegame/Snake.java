@@ -53,6 +53,7 @@ class Snake {
         // range from the passed in parameters
         mSegmentSize = ss;
         mMoveRange = mr;
+        int testing = 5;
 
         // Create and scale the bitmaps
         mBitmapHeadRight = BitmapFactory
