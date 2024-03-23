@@ -205,7 +205,7 @@ class SnakeGame extends SurfaceView implements Runnable{
             mCanvas = mSurfaceHolder.lockCanvas();
 
             // Fill the screen with a color
-            mCanvas.drawColor(Color.argb(255, 26, 128, 182));
+            mCanvas.drawColor(Color.argb(255, 75, 83, 32));
 
             // Set the size and color of the mPaint for the text
             mPaint.setColor(Color.argb(255, 255, 255, 255));
@@ -223,10 +223,12 @@ class SnakeGame extends SurfaceView implements Runnable{
                 mCanvas.drawText(getResources().
                                 getString(R.string.tap_to_play),
                         200, 700, mPaint);
+
+                mPaint.setTextSize(120);
+                mPaint.setColor(Color.argb(255, 64, 224, 208));
+                mCanvas.drawText("David Pham", 1700, (mCanvas.getHeight()/10)*1, mPaint);
+                mCanvas.drawText("Taekjin Jung", 1700, (mCanvas.getHeight()/10)*2, mPaint);
             }else{
-                // Draw the apple and the snake
-                mApple.draw(mCanvas, mPaint);
-                mSnake.draw(mCanvas, mPaint);
                 // Draw the score
                 mCanvas.drawText("Score: " + mScore, (mCanvas.getWidth()/10)*7, 120, mPaint);
 
@@ -235,6 +237,10 @@ class SnakeGame extends SurfaceView implements Runnable{
                 }else{
                     mInterfaces.draw(mCanvas, mPaint, true);    //draw pause button
                 }
+
+                // Draw the apple and the snake
+                mApple.draw(mCanvas, mPaint);
+                mSnake.draw(mCanvas, mPaint);
             }
 
             // Unlock the mCanvas and reveal the graphics for this frame
@@ -261,10 +267,11 @@ class SnakeGame extends SurfaceView implements Runnable{
                     mPaused = false;
 
                     return true;
+                }else if(!mPaused){                                     //when the game is playing
+                    // Let the Snake class handle the input
+                    mSnake.switchHeading(motionEvent);
                 }
 
-                // Let the Snake class handle the input
-                mSnake.switchHeading(motionEvent);
                 break;
 
             default:
