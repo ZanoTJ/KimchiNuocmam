@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import java.util.Random;
 
-class Apple {
+class Apple extends GameObject{
 
     // The location of the apple on the grid
     // Not in pixels

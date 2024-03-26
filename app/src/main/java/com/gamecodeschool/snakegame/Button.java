@@ -12,7 +12,7 @@ import android.view.MotionEvent;
  * Created by taekjinjung on 3/22/2024.
  */
 
-class Button {
+class Button extends GameObject {
     private Bitmap mBitmapPlay;
     private Bitmap mBitmapPause;
 
