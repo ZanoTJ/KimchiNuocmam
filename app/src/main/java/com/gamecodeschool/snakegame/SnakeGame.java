@@ -35,6 +35,7 @@ class SnakeGame extends SurfaceView implements Runnable{
     // The size in segments of the playable area
     private final int NUM_BLOCKS_WIDE = 40;
     private int mNumBlocksHigh;
+    private int mBlockSize;
 
     //get the screen range
     private Point mScreenRange;
@@ -43,9 +44,9 @@ class SnakeGame extends SurfaceView implements Runnable{
     private int mScore;
 
     // Objects for drawing
-    private Canvas mCanvas;
-    private SurfaceHolder mSurfaceHolder;
-    private Paint mPaint;
+    protected Canvas mCanvas;
+    protected SurfaceHolder mSurfaceHolder;
+    protected Paint mPaint;
 
     // A snake ssss
     private Snake mSnake;
@@ -60,11 +61,21 @@ class SnakeGame extends SurfaceView implements Runnable{
     public SnakeGame(Context context, Point size) {
         super(context);
 
-        // Work out how many pixels each block is
-        int blockSize = size.x / NUM_BLOCKS_WIDE;
-        // How many blocks of the same size will fit into the height
-        mNumBlocksHigh = size.y / blockSize;
+        setBlocks(size);
 
+        setSounds(context);
+
+        setObjects(context);
+    }
+
+    private void setBlocks(Point size){
+        // Work out how many pixels each block is
+        mBlockSize = size.x / NUM_BLOCKS_WIDE;
+        // How many blocks of the same size will fit into the height
+        mNumBlocksHigh = size.y / mBlockSize;
+    }
+
+    private void setSounds(Context context){
         // Initialize the SoundPool
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -93,7 +104,9 @@ class SnakeGame extends SurfaceView implements Runnable{
         } catch (IOException e) {
             // Error
         }
+    }
 
+    private void setObjects(Context context){
         // Initialize the drawing objects
         mSurfaceHolder = getHolder();
         mPaint = new Paint();
@@ -101,13 +114,10 @@ class SnakeGame extends SurfaceView implements Runnable{
         mScreenRange = new Point(NUM_BLOCKS_WIDE, mNumBlocksHigh);
 
         // Call the constructors of our two game objects
-        mApple = new Apple(context, mScreenRange, blockSize);
-
-        mSnake = new Snake(context, mScreenRange, blockSize);
-
-        mInterfaces = new Interfaces(context, mScreenRange, blockSize);
+        mApple = new Apple(context, mScreenRange, mBlockSize);
+        mSnake = new Snake(context, mScreenRange, mBlockSize);
+        mInterfaces = new Interfaces(context, mScreenRange, mBlockSize); //user interface
     }
-
 
     // Called to start a new game
     public void newGame() {
@@ -146,7 +156,7 @@ class SnakeGame extends SurfaceView implements Runnable{
     public boolean updateRequired() {
 
         // Run at 10 frames per second
-        final long TARGET_FPS = 25;
+        final long TARGET_FPS = 10;
         // There are 1000 milliseconds in a second
         final long MILLIS_PER_SECOND = 1000;
 
@@ -211,47 +221,11 @@ class SnakeGame extends SurfaceView implements Runnable{
             mPaint.setColor(Color.argb(255, 255, 255, 255));
             mPaint.setTextSize(120);
 
-            // Draw the score
-            mCanvas.drawText("" + mScore, 20, 120, mPaint);
-
-            // Draw the apple and the snake
-            mApple.draw(mCanvas, mPaint);
-            mSnake.draw(mCanvas, mPaint);
-
-            //Draw our names
-            mPaint.setColor(Color.argb(255, 64, 224, 208));
-            mCanvas.drawText("David, Jin", + 1700, 120, mPaint);
-
             // Draw some text while paused
             if(mPaused && gotReset){
-                // Set the size and color of the mPaint for the text
-                mPaint.setColor(Color.argb(255, 64, 224, 208));
-                mPaint.setTextSize(250);
-
-                // Draw the message
-                // We will give this an international upgrade soon
-                //mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
-                mCanvas.drawText(getResources().
-                                getString(R.string.tap_to_play),
-                        200, 700, mPaint);
-
-                mPaint.setTextSize(120);
-                mPaint.setColor(Color.argb(255, 64, 224, 208));
-                mCanvas.drawText("David Pham", 1700, (mCanvas.getHeight()/10)*1, mPaint);
-                mCanvas.drawText("Taekjin Jung", 1700, (mCanvas.getHeight()/10)*2, mPaint);
+                startPage();
             }else{
-                // Draw the score
-                mCanvas.drawText("Score: " + mScore, (mCanvas.getWidth()/10)*7, 120, mPaint);
-
-                if(mPaused){
-                    mInterfaces.draw(mCanvas, mPaint, false);   //draw play button
-                }else{
-                    mInterfaces.draw(mCanvas, mPaint, true);    //draw pause button
-                }
-
-                // Draw the apple and the snake
-                mApple.draw(mCanvas, mPaint);
-                mSnake.draw(mCanvas, mPaint);
+                inGamePage();
             }
 
             // Unlock the mCanvas and reveal the graphics for this frame
@@ -259,36 +233,70 @@ class SnakeGame extends SurfaceView implements Runnable{
         }
     }
 
+    private void startPage(){
+        // Set the size and color of the mPaint for the text
+        mPaint.setTextSize(250);
+
+        // Draw the message
+        mCanvas.drawText(getResources().
+                        getString(R.string.tap_to_play),
+                200, 700, mPaint);
+
+        //Draw our names
+        mPaint.setColor(Color.argb(255, 64, 224, 208));
+        mPaint.setTextSize(120);
+        mCanvas.drawText("David Pham", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10) * 1, mPaint);
+        mCanvas.drawText("Taekjin Jung", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10)*2, mPaint);
+    }
+
+    private void inGamePage(){
+        // Draw the score
+        mCanvas.drawText("Score: " + mScore, (mCanvas.getWidth()/10)*7, 120, mPaint);
+
+        if(mPaused){
+            mInterfaces.draw(mCanvas, mPaint, false);   //draw play button
+        }else{
+            mInterfaces.draw(mCanvas, mPaint, true);    //draw pause button
+        }
+
+        // Draw the apple and the snake
+        mApple.draw(mCanvas, mPaint);
+        mSnake.draw(mCanvas, mPaint);
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
-                if (mPaused && gotReset) {  //for new start
-                    mPaused = false;
-                    gotReset = false;
-                    newGame();
-
-                    // Don't want to process snake direction for this tap
-                    return true;
-                }else if(!mPaused && mInterfaces.buttonRange(motionEvent)){ //to pause button
-                    mPaused = true;
-
-                    return true;
-                }else if(mPaused && mInterfaces.buttonRange(motionEvent)){  //to play button
-                    mPaused = false;
-
-                    return true;
-                }else if(!mPaused){                                     //when the game is playing
-                    // Let the Snake class handle the input
-                    mSnake.switchHeading(motionEvent);
-                }
-
-                break;
+                return validTouch(motionEvent);
 
             default:
                 break;
 
         }
+        return true;
+    }
+
+    //MAKE STARTPAGE CLASS & INGAMEPAGE CLASS AS CHILD CLASSES OF SNAKEGAME
+    private boolean validTouch(MotionEvent motionEvent){
+        if (mPaused && gotReset) {  //for new start
+            mPaused = false;
+            gotReset = false;
+            newGame();
+
+            return true;
+        }else if(!mPaused && mInterfaces.buttonRange(motionEvent)){ //to pause button
+            mPaused = true;
+
+        }else if(mPaused && mInterfaces.buttonRange(motionEvent)){  //to play button
+            mPaused = false;
+
+        }else if(!mPaused){                                     //when the game is playing
+            // Let the Snake class handle the input
+            mSnake.switchHeading(motionEvent);
+        }
+
+        // Don't want to process snake direction for this tap
         return true;
     }
 

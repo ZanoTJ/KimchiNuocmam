@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake {
+class Snake implements GameObject {
 
     // The location in the grid of all the segments
     private ArrayList<Point> segmentLocations;
@@ -53,7 +53,6 @@ class Snake {
         // range from the passed in parameters
         mSegmentSize = ss;
         mMoveRange = mr;
-        int testing = 5;
 
         // Create and scale the bitmaps
         mBitmapHeadRight = BitmapFactory
@@ -206,7 +205,7 @@ class Snake {
         return false;
     }
 
-    void draw(Canvas canvas, Paint paint) {
+    public void draw(Canvas canvas, Paint paint) {
 
         // Don't run this code if ArrayList has nothing in it
         if (!segmentLocations.isEmpty()) {
