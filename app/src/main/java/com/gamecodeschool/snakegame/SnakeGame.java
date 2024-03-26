@@ -44,16 +44,16 @@ class SnakeGame extends SurfaceView implements Runnable{
     private int mScore;
 
     // Objects for drawing
-    protected Canvas mCanvas;
-    protected SurfaceHolder mSurfaceHolder;
-    protected Paint mPaint;
+    private Canvas mCanvas;
+    private SurfaceHolder mSurfaceHolder;
+    private Paint mPaint;
 
-    // A snake ssss
+    // A snake
     private Snake mSnake;
     // And an apple
     private Apple mApple;
 
-    private Interfaces mInterfaces;
+    private Button mButton;
 
 
     // This is the constructor method that gets called
@@ -116,7 +116,7 @@ class SnakeGame extends SurfaceView implements Runnable{
         // Call the constructors of our two game objects
         mApple = new Apple(context, mScreenRange, mBlockSize);
         mSnake = new Snake(context, mScreenRange, mBlockSize);
-        mInterfaces = new Interfaces(context, mScreenRange, mBlockSize); //user interface
+        mButton = new Button(context, mScreenRange, mBlockSize); //user interface
     }
 
     // Called to start a new game
@@ -201,7 +201,7 @@ class SnakeGame extends SurfaceView implements Runnable{
             // Pause the game ready to start again
             mSP.play(mCrashID, 1, 1, 0, 0, 1);
 
-            mPaused =true;
+            mPaused = true;
             gotReset = true;
         }
 
@@ -245,6 +245,7 @@ class SnakeGame extends SurfaceView implements Runnable{
         //Draw our names
         mPaint.setColor(Color.argb(255, 64, 224, 208));
         mPaint.setTextSize(120);
+
         mCanvas.drawText("David Pham", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10) * 1, mPaint);
         mCanvas.drawText("Taekjin Jung", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10)*2, mPaint);
     }
@@ -254,9 +255,9 @@ class SnakeGame extends SurfaceView implements Runnable{
         mCanvas.drawText("Score: " + mScore, (mCanvas.getWidth()/10)*7, 120, mPaint);
 
         if(mPaused){
-            mInterfaces.draw(mCanvas, mPaint, false);   //draw play button
+            mButton.draw(mCanvas, mPaint, false);   //draw play button
         }else{
-            mInterfaces.draw(mCanvas, mPaint, true);    //draw pause button
+            mButton.draw(mCanvas, mPaint, true);    //draw pause button
         }
 
         // Draw the apple and the snake
@@ -285,10 +286,10 @@ class SnakeGame extends SurfaceView implements Runnable{
             newGame();
 
             return true;
-        }else if(!mPaused && mInterfaces.buttonRange(motionEvent)){ //to pause button
+        }else if(!mPaused && mButton.buttonRange(motionEvent)){ //to pause button
             mPaused = true;
 
-        }else if(mPaused && mInterfaces.buttonRange(motionEvent)){  //to play button
+        }else if(mPaused && mButton.buttonRange(motionEvent)){  //to play button
             mPaused = false;
 
         }else if(!mPaused){                                     //when the game is playing

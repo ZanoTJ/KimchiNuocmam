@@ -12,11 +12,11 @@ import android.view.MotionEvent;
  * Created by taekjinjung on 3/22/2024.
  */
 
-class Interfaces {
+class Button {
     private Bitmap mBitmapPlay;
     private Bitmap mBitmapPause;
 
-    public Interfaces(Context context, Point mr, int ss){
+    public Button(Context context, Point mr, int ss){
         mBitmapPlay = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
         mBitmapPause = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
     }
