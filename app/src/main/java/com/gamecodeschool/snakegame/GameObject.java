@@ -5,9 +5,11 @@ package com.gamecodeschool.snakegame;
  */
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 
-public class GameObject {
+abstract class GameObject {
     //The range of entire grid
     protected Point mScreenRange;
     protected int mSegmentSize;  //each grid size
@@ -17,5 +19,5 @@ public class GameObject {
         mSegmentSize = s;
     }
 
-    
+    abstract void draw(Canvas canvas, Paint paint);
 }
