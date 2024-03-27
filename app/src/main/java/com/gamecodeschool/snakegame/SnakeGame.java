@@ -223,7 +223,26 @@ class SnakeGame extends SurfaceView implements Runnable{
 
             // Draw some text while paused
             if(mPaused && gotReset){
+
                 startPage();
+
+                // Set the size and color of the mPaint for the text
+                mPaint.setColor(Color.argb(255, 255, 255, 255));
+                mPaint.setTextSize(250);
+
+                // Draw the message
+                // We will give this an international upgrade soon
+                //mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
+                mCanvas.drawText(getResources().
+                                getString(R.string.tap_to_play),
+                        200, 700, mPaint);
+
+                //Draw our names
+                mPaint.setTextSize(120);
+                mPaint.setColor(Color.argb(255, 64, 224, 208));
+                mCanvas.drawText("David Pham", 1700, (mCanvas.getHeight()/10)*1, mPaint);
+                mCanvas.drawText("Taekjin Jung", 1700, (mCanvas.getHeight()/10)*2, mPaint);
+
             }else{
                 inGamePage();
             }
