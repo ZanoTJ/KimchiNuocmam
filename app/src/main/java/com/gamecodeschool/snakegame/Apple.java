@@ -23,8 +23,8 @@ class Apple extends GameObject{
     private Bitmap mBitmapApple;
 
     /// Set up the apple in the constructor
-    public Apple(Context context, Point screenRange, int segmentSize){
-        super(context, screenRange, segmentSize);
+    public Apple(Context context, Point screenRange, int size){
+        super(context, screenRange, size);
         location.x = INITIAL_OFFSCREEN_X;
         // Make a note of the passed in spawn range
         //mSpawnRange = sr;
@@ -36,7 +36,7 @@ class Apple extends GameObject{
         mBitmapApple = BitmapFactory.decodeResource(context.getResources(), R.drawable.apple);
 
         // Resize the bitmap
-        mBitmapApple = Bitmap.createScaledBitmap(mBitmapApple, segmentSize, segmentSize, false);
+        mBitmapApple = Bitmap.createScaledBitmap(mBitmapApple, size, size, false);
     }
 
     // This is called every time an apple is eaten

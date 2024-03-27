@@ -12,13 +12,11 @@ import android.view.MotionEvent;
  * Created by taekjinjung on 3/22/2024.
  */
 
-class Button extends GameObject {
+class Button {
     private Bitmap mBitmapPlay;
     private Bitmap mBitmapPause;
 
     public Button(Context context, Point mr, int ss){
-        super(context, mr, ss);
-
         mBitmapPlay = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
         mBitmapPause = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
     }
