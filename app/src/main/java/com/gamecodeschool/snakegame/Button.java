@@ -17,6 +17,8 @@ class Button extends GameObject {
     private Bitmap mBitmapPause;
 
     public Button(Context context, Point mr, int ss){
+        super(context, mr, ss);
+
         mBitmapPlay = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
         mBitmapPause = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
     }

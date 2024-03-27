@@ -17,10 +17,10 @@ class Snake extends GameObject {
     private ArrayList<Point> segmentLocations;
 
     // How big is each segment of the snake?
-    private int mSegmentSize;
+    //private int mSegmentSize;
 
     // How big is the entire grid
-    private Point mMoveRange;
+    //private Point mMoveRange;
 
     // Where is the centre of the screen
     // horizontally in pixels?
@@ -45,14 +45,13 @@ class Snake extends GameObject {
 
 
     Snake(Context context, Point mr, int ss) {
-
+        super(context, mr, ss);
         // Initialize our ArrayList
         segmentLocations = new ArrayList<>();
 
         // Initialize the segment size and movement
         // range from the passed in parameters
-        mSegmentSize = ss;
-        mMoveRange = mr;
+        //mSegmentSize = ss;
 
         // Create and scale the bitmaps
         mBitmapHeadRight = BitmapFactory
@@ -170,9 +169,9 @@ class Snake extends GameObject {
 
         // Hit any of the screen edges
         if (segmentLocations.get(0).x == -1 ||
-                segmentLocations.get(0).x > mMoveRange.x ||
+                segmentLocations.get(0).x > mScreenRange.x ||
                 segmentLocations.get(0).y == -1 ||
-                segmentLocations.get(0).y > mMoveRange.y) {
+                segmentLocations.get(0).y > mScreenRange.y) {
 
             dead = true;
         }
