@@ -17,8 +17,8 @@ public class SnakeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-       // textView = findViewById(R.id.tv);
+        setContentView(R.layout.activity_main);
+
 
 
         // Get the pixel dimensions of the screen
@@ -34,6 +34,11 @@ public class SnakeActivity extends Activity {
         // Make snakeEngine the view of the Activity
         setContentView(mSnakeGame);
 
+        setupViews();
+
+
+    }
+    private void setupViews(){
 
     }
 

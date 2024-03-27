@@ -120,7 +120,9 @@ class SnakeGame extends SurfaceView implements Runnable{
     }
 
     // Called to start a new game
-    public void newGame() {
+    public void newGame(int width, int height) {
+        mNumBlocksWide = width;
+        mNumBlocksHigh = height;
 
         // reset the snake
         mSnake.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
@@ -240,8 +242,8 @@ class SnakeGame extends SurfaceView implements Runnable{
                 //Draw our names
                 mPaint.setTextSize(120);
                 mPaint.setColor(Color.argb(255, 64, 224, 208));
-                mCanvas.drawText("David Pham", 1700, (mCanvas.getHeight()/10)*1, mPaint);
-                mCanvas.drawText("Taekjin Jung", 1700, (mCanvas.getHeight()/10)*2, mPaint);
+                mCanvas.drawText("David Pham", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10) * 1, mPaint);
+                mCanvas.drawText("Taekjin Jung", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10)*2, mPaint);
 
             }else{
                 inGamePage();
@@ -261,12 +263,6 @@ class SnakeGame extends SurfaceView implements Runnable{
                         getString(R.string.tap_to_play),
                 200, 700, mPaint);
 
-        //Draw our names
-        mPaint.setColor(Color.argb(255, 64, 224, 208));
-        mPaint.setTextSize(120);
-
-        mCanvas.drawText("David Pham", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10) * 1, mPaint);
-        mCanvas.drawText("Taekjin Jung", (mCanvas.getWidth()/10)*6, (mCanvas.getHeight()/10)*2, mPaint);
     }
 
     private void inGamePage(){
