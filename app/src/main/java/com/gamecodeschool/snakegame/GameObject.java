@@ -16,4 +16,6 @@ public class GameObject {
         mScreenRange = mr;
         mSegmentSize = s;
     }
+
+    
 }
