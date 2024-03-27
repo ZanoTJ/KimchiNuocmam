@@ -2,20 +2,26 @@ package com.gamecodeschool.snakegame;
 
 import android.app.Activity;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Display;
+import android.widget.TextView;
 
 public class SnakeActivity extends Activity {
 
     // Declare an instance of SnakeGame
     SnakeGame mSnakeGame;
+    TextView textView;
 
     // Set the game up
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_main);
+       // textView = findViewById(R.id.tv);
 
-        // Get the pixel dimensions of the screemn
+
+        // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
 
         // Initialize the result into a Point object
@@ -27,7 +33,10 @@ public class SnakeActivity extends Activity {
 
         // Make snakeEngine the view of the Activity
         setContentView(mSnakeGame);
+
+
     }
+
 
     // Start the thread in snakeEngine
     @Override
