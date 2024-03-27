@@ -194,19 +194,19 @@ class Snake extends GameObject {
             // Draw the head
             switch (heading) {
                 case RIGHT:
-                    drawHead(canvas, paint, 0);
+                    drawHead(canvas, paint, 0);     //right
                     break;
 
                 case LEFT:
-                    drawHead(canvas, paint, 1);
+                    drawHead(canvas, paint, 1);     //left
                     break;
 
                 case UP:
-                    drawHead(canvas, paint, 2);
+                    drawHead(canvas, paint, 2);     //up
                     break;
 
                 case DOWN:
-                    drawHead(canvas, paint, 3);
+                    drawHead(canvas, paint, 3);     //down
                     break;
             }
 
