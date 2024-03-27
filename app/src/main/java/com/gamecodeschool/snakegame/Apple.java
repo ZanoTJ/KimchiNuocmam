@@ -19,8 +19,6 @@ class Apple extends GameObject{
     // The range of values we can choose from
     // to spawn an apple
     //private Point mSpawnRange;
-    //private int mSize;
-
     // An image to represent the apple
     private Bitmap mBitmapApple;
 
@@ -51,6 +49,7 @@ class Apple extends GameObject{
     // Let SnakeGame know where the apple is
     // SnakeGame can share this with the snake
     Point getLocation(){
+
         return location;
     }
 
