@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import java.util.Random;
 
-class Apple {
+class Apple extends GameObject{
 
     // The location of the apple on the grid
     // Not in pixels
@@ -16,19 +16,19 @@ class Apple {
 
     // The range of values we can choose from
     // to spawn an apple
-    private Point mSpawnRange;
+    //private Point mSpawnRange;
     private int mSize;
 
     // An image to represent the apple
     private Bitmap mBitmapApple;
 
     /// Set up the apple in the constructor
-    Apple(Context context, Point sr, int s){
-
+    public Apple(Context context, Point sr, int s){
+        super(context, sr, s);
         // Make a note of the passed in spawn range
-        mSpawnRange = sr;
+        //mSpawnRange = sr;
         // Make a note of the size of an apple
-        mSize = s;
+        //mSegmentSize = s;
         // Hide the apple off-screen until the game starts
         location.x = -10;
 
@@ -43,8 +43,8 @@ class Apple {
     void spawn(){
         // Choose two random values and place the apple
         Random random = new Random();
-        location.x = random.nextInt(mSpawnRange.x) + 1;
-        location.y = random.nextInt(mSpawnRange.y - 1) + 1;
+        location.x = random.nextInt(mScreenRange.x) + 1;
+        location.y = random.nextInt(mScreenRange.y - 1) + 1;
     }
 
     // Let SnakeGame know where the apple is
@@ -54,9 +54,9 @@ class Apple {
     }
 
     // Draw the apple
-    void draw(Canvas canvas, Paint paint){
+    public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(mBitmapApple,
-                location.x * mSize, location.y * mSize, paint);
+                location.x * mSegmentSize, location.y * mSegmentSize, paint);
 
     }
 
