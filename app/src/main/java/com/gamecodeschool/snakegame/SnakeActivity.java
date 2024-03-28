@@ -11,14 +11,11 @@ public class SnakeActivity extends Activity {
 
     // Declare an instance of SnakeGame
     SnakeGame mSnakeGame;
-    TextView textView;
 
     // Set the game up
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-       // textView = findViewById(R.id.tv);
 
 
         // Get the pixel dimensions of the screen
