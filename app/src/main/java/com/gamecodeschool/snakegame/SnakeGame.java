@@ -116,7 +116,7 @@ class SnakeGame extends SurfaceView implements Runnable{
         // Call the constructors of our two game objects
         mApple = new Apple(context, mScreenRange, mBlockSize);
         mSnake = new Snake(context, mScreenRange, mBlockSize);
-        mButton = new Button(context, mScreenRange, mBlockSize); //user interface
+        mButton = new Button(context);
     }
 
     // Called to start a new game

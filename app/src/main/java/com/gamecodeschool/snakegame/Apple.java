@@ -53,10 +53,6 @@ class Apple extends GameObject{
         return location;
     }
 
-    public void setLocation(Point location){
-        this.location = location;
-    }
-
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(mBitmapApple,
